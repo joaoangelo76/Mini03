@@ -1,5 +1,5 @@
 //
-//  DisagreementCard.swift
+//  ReconciliationCard.swift
 //  MyFirstPlaygroundApp
 //
 //  Created by João Ângelo on 12/12/23.
@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class DisagreementCard: SKScene{
+class ReconciliationCard: SKScene{
     
     let cam = SKCameraNode()
     
@@ -20,10 +20,10 @@ class DisagreementCard: SKScene{
     }
     
     private func DiscoveryCard(){
-        let disagreementCard = SKLabelNode(text: "DISAGREEMENT")
-        disagreementCard.fontSize = 70
-        disagreementCard.fontColor = .systemRed
+        let reconciliationCard = SKLabelNode(text: "RECONCILIATION")
+        reconciliationCard.fontSize = 70
+        reconciliationCard.fontColor = .white
         
-        addChild(disagreementCard)
+        addChild(reconciliationCard)
     }
 }
