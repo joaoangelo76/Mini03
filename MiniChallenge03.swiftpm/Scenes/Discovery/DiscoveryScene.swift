@@ -30,7 +30,4 @@ class DiscoveryScene: SKScene{
         addChild(bob)
     }
     
-    private func rotation(){
-       
-    }
 }
