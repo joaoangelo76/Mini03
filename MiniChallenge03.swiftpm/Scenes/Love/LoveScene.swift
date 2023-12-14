@@ -141,10 +141,6 @@ class LoveScene: SKScene{
         textBoxer3.run(sequence)
     }
     
-    private func bruh(){
-        
-    }
-    
     private func door(){
         let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
         door.fillColor = .systemPurple
