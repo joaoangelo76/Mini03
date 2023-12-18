@@ -119,8 +119,3 @@ class BeginningScene: SKScene, SKPhysicsContactDelegate{
 func +(point1:CGPoint,point2:CGPoint) -> CGPoint {
     return CGPoint(x: point1.x + point2.x, y: point1.y + point2.y)
 }
-
-
-
-
-

@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  LoveScene.swift
 //  MyFirstPlaygroundApp
 //
 //  Created by João Ângelo on 23/11/23.
