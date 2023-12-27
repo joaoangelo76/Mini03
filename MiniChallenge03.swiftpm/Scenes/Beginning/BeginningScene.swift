@@ -37,10 +37,6 @@ class BeginningScene: SKScene, SKPhysicsContactDelegate{
         backgroundColor = .black
     }
     
-    private func fuckAssis(){
-        print("Fuck Assis!")
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         control = true
     }

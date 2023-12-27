@@ -15,6 +15,10 @@ class DisagreementScene: SKScene{
     
     var countTaps = 0
     
+    let angryReact = SKShapeNode(circleOfRadius: 30)
+    let angryReact2 = SKShapeNode(circleOfRadius: 30)
+    let angryReact3 = SKShapeNode(circleOfRadius: 15)
+    
     override func didMove(to view: SKView) {
         backgroundColor = .black
         
@@ -29,20 +33,30 @@ class DisagreementScene: SKScene{
             if(countTaps==1){
                 angryReaction()
             }
-            if(countTaps==2){
-                
-            }
         }while(touches.first!.tapCount < 1)
     }
     
     func angryReaction(){
-        let angryReact = SKShapeNode(circleOfRadius: 30)
-        let angryReact2 = SKShapeNode(circleOfRadius: 30)
-        let angryReact3 = SKShapeNode(circleOfRadius: 5)
         
-        angryReact.position = CGPoint(x: size.width/2 , y: size.height/2)
-        angryReact2.position = CGPoint(x: size.width/2, y: size.height/2)
-        angryReact3.position = CGPoint(x: size.width/2 - 200, y: size.height/2 + 10)
+        angryReact.fillColor = .green
+        angryReact2.fillColor = .green
+        angryReact3.fillColor = .green
+        
+        angryReact.position = CGPoint(x: size.width/2 + 210 , y: size.height/2 + 280)
+        angryReact2.position = CGPoint(x: size.width/2 + 490 , y: size.height/2 + 280)
+        angryReact3.position = CGPoint(x: size.width/2 - 180, y: size.height/2 + 30)
+        
+        let appear = SKAction.fadeIn(withDuration: 2)
+        let disappear = SKAction.fadeOut(withDuration: 10)
+        let sequence = SKAction.sequence([appear, disappear])
+        
+        addChild(angryReact)
+        addChild(angryReact2)
+        addChild(angryReact3)
+        
+        angryReact.run(sequence)
+        angryReact2.run(sequence)
+        angryReact3.run(sequence)
     }
     
     func addBob(){
