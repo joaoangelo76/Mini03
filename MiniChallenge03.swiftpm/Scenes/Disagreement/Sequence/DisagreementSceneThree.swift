@@ -1,13 +1,14 @@
 //
-//  DisagreementScene.swift
-//  MiniChallenge03
+//  File.swift
+//  
 //
-//  Created by João Ângelo on 12/12/23.
+//  Created by João Ângelo on 13/01/24.
 //
 
 import SpriteKit
 
-class DisagreementScene: SKScene{
+class DisagreementSceneThree: SKScene{
+    
     
     let bob = SKShapeNode(circleOfRadius: 30)
     let dad = SKShapeNode(circleOfRadius: 100)
@@ -25,6 +26,8 @@ class DisagreementScene: SKScene{
         addBob()
         addDad()
         addMom()
+        
+        addTextBox()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -43,11 +46,9 @@ class DisagreementScene: SKScene{
         
         angryReact.fillColor = .green
         angryReact2.fillColor = .green
-        angryReact3.fillColor = .green
         
         angryReact.position = CGPoint(x: size.width/2 + 210 , y: size.height/2 + 280)
         angryReact2.position = CGPoint(x: size.width/2 + 490 , y: size.height/2 + 280)
-        angryReact3.position = CGPoint(x: size.width/2 - 180, y: size.height/2 + 30)
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 10)
@@ -55,29 +56,41 @@ class DisagreementScene: SKScene{
         
         addChild(angryReact)
         addChild(angryReact2)
-        addChild(angryReact3)
         
         angryReact.run(sequence)
         angryReact2.run(sequence)
-        angryReact3.run(sequence)
     }
     
     func addBob(){
         bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2)
-        bob.fillColor = .purple
+        bob.fillColor = .blue
         addChild(bob)
     }
     
     func addDad(){
         dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 200)
-        dad.fillColor = .blue
+        dad.fillColor = .systemTeal
         addChild(dad)
     }
     
     func addMom(){
         mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 200)
-        mom.fillColor = .red
+        mom.fillColor = .systemPink
         addChild(mom)
+    }
+    
+    func addTextBox(){
+        let textBoxer = SKLabelNode(text: "And with that...")
+        textBoxer.fontColor = .white
+        textBoxer.position = CGPoint(x: size.width/2 - 200, y: size.height/2 + 50)
+    
+        let appear = SKAction.fadeAlpha(to: 1, duration: 6)
+        let disappear = SKAction.fadeAlpha(to: 0, duration: 6)
+        let sequence = SKAction.sequence([appear, disappear])
+        
+        addChild(textBoxer)
+        
+        textBoxer.run(sequence)
     }
     
 }
