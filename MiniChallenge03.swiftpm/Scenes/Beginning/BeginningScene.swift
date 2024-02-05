@@ -7,34 +7,44 @@
 
 import SpriteKit
 
-class BeginningScene: SKScene, SKPhysicsContactDelegate{
+let bobCategory: UInt32 = 1
+let doorCategory: UInt32 = 2
+
+class BeginningScene: SKScene{
     
-    let NewScene = LoveCard()
-    let transition = SKTransition.fade(with: .black, duration: 2)
+    var background = SKSpriteNode(imageNamed: "Theater")
     
     let cam = SKCameraNode()
     
     var control: Bool = false
     
-    var greyBob = SKShapeNode(circleOfRadius: 30)
+    var greyBob = SKSpriteNode(imageNamed: "greyBob")
+    
+    let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
     
     let textBoxer = SKLabelNode(text: "In the beginning...")
     let textBoxer2 = SKLabelNode(text: "We are empty shells.")
     let textBoxer3 = SKLabelNode(text: "Ready to be filled.")
     
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         grayBob()
         
         textBox()
         textBox2()
         textBox3()
         
-        door()
+        doorWhatever()
         
         self.camera = cam
         
         view.isPaused = false
         backgroundColor = .black
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -54,8 +64,12 @@ class BeginningScene: SKScene, SKPhysicsContactDelegate{
     }
     
     private func grayBob(){
-        greyBob.fillColor = .gray
         greyBob.position = CGPoint(x: size.width/2, y: size.height/2)
+        greyBob.physicsBody = SKPhysicsBody(circleOfRadius: 30)
+        greyBob.physicsBody?.affectedByGravity = false
+        greyBob.physicsBody?.categoryBitMask = bobCategory
+        greyBob.physicsBody?.collisionBitMask = 0
+        greyBob.physicsBody?.contactTestBitMask = doorCategory
         
         addChild(greyBob)
     }
@@ -102,10 +116,14 @@ class BeginningScene: SKScene, SKPhysicsContactDelegate{
         textBoxer3.run(sequence)
     }
     
-    private func door(){
-        let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
+    private func doorWhatever(){
         door.fillColor = .systemPurple
         door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
+        door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
+        door.physicsBody?.affectedByGravity = false
+        door.physicsBody?.categoryBitMask = doorCategory
+        door.physicsBody?.collisionBitMask = 0
+        door.physicsBody?.contactTestBitMask = bobCategory
         
         addChild(door)
     }
@@ -114,4 +132,25 @@ class BeginningScene: SKScene, SKPhysicsContactDelegate{
 
 func +(point1:CGPoint,point2:CGPoint) -> CGPoint {
     return CGPoint(x: point1.x + point2.x, y: point1.y + point2.y)
+}
+
+extension BeginningScene: SKPhysicsContactDelegate{
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+
+        print("didBegin entered for \(String(describing: contact.bodyA.node?.name)) and \(String(describing: contact.bodyB.node?.name))")
+
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+
+        switch contactMask {
+             case doorCategory | bobCategory:
+                print("Bob and door have contacted.")
+            let newScene = LoveScene()
+            newScene.size = self.size
+            self.scene?.view?.presentScene(newScene)
+             default:
+                print("Some other contact occurred")
+             }
+    }
+
 }

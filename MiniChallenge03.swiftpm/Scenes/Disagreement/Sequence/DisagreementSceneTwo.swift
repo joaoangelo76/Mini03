@@ -9,7 +9,7 @@ import SpriteKit
 
 class DisagreementSceneTwo: SKScene{
     
-    let dad = SKShapeNode(circleOfRadius: 100)
+    let dad = SKSpriteNode(imageNamed: "Dad")
     let textBoxer = SKLabelNode(text: "Memories will be awaken.")
     
     var countTaps = 0
@@ -29,14 +29,15 @@ class DisagreementSceneTwo: SKScene{
                 loveBalloon()
             }
             else if(countTaps==2){
-                
+                let newScene = DisagreementSceneThree()
+                newScene.size = self.size
+                self.scene?.view?.presentScene(newScene)
             }
         }while(touches.first!.tapCount < 1)
     }
     
     func addDad(){
         dad.position = CGPoint(x: size.width/2, y: size.height/2)
-        dad.fillColor = .blue
         addChild(dad)
     }
     

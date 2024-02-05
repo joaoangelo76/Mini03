@@ -7,11 +7,14 @@
 
 import SpriteKit
 
+let bobLoveCategory: UInt32 = 1
+let doorLoveCategory: UInt32 = 2
+
 class LoveScene: SKScene{
     
-    let bob = SKShapeNode(circleOfRadius: 30)
-    let dad = SKShapeNode(circleOfRadius: 100)
-    let mom = SKShapeNode(circleOfRadius: 100)
+    let bob = SKSpriteNode(imageNamed: "greyBob")
+    let dad = SKSpriteNode(imageNamed: "Dad")
+    let mom = SKSpriteNode(imageNamed: "Mom")
     
     let cam = SKCameraNode()
     
@@ -20,6 +23,10 @@ class LoveScene: SKScene{
     var countTaps = 0
     
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
+        backgroundColor = .black
+        
         self.camera = cam
         
         addBob()
@@ -67,26 +74,28 @@ class LoveScene: SKScene{
     
     func addBob(){
         bob.position = CGPoint(x: size.width/2, y: size.height/2)
-        bob.fillColor = .purple
+        bob.physicsBody = SKPhysicsBody(circleOfRadius: 30)
+        bob.physicsBody?.affectedByGravity = false
+        bob.physicsBody?.categoryBitMask = bobLoveCategory
+        bob.physicsBody?.collisionBitMask = 0
+        bob.physicsBody?.contactTestBitMask = doorLoveCategory
+        
         addChild(bob)
     }
     
     func addDad(){
         dad.position = CGPoint(x: size.width/2 + 200, y: size.height/2 + 200)
-        dad.fillColor = .blue
         addChild(dad)
     }
     
     func addMom(){
         mom.position = CGPoint(x: size.width/2 - 170, y: size.height/2 + 200)
-        mom.fillColor = .red
         addChild(mom)
     }
     
     func loveBalloon(){
-        let loveBalloon = SKShapeNode(circleOfRadius: 50)
-        loveBalloon.position = CGPoint(x: size.width/2, y: size.height/2 + 200)
-        loveBalloon.fillColor = .white
+        let loveBalloon = SKSpriteNode(imageNamed: "loveBalloon")
+        loveBalloon.position = CGPoint(x: size.width/2 + 25, y: size.height/2 + 300)
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 2)
@@ -145,7 +154,33 @@ class LoveScene: SKScene{
         let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
         door.fillColor = .systemPurple
         door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
+        door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
+        door.physicsBody?.affectedByGravity = false
+        door.physicsBody?.categoryBitMask = doorLoveCategory
+        door.physicsBody?.collisionBitMask = 0
+        door.physicsBody?.contactTestBitMask = bobLoveCategory
         
         addChild(door)
     }
+}
+
+extension LoveScene: SKPhysicsContactDelegate{
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+
+        print("didBegin entered for \(String(describing: contact.bodyA.node?.name)) and \(String(describing: contact.bodyB.node?.name))")
+
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+
+        switch contactMask {
+             case doorLoveCategory | bobLoveCategory:
+                print("Bob and door have contacted.")
+            let newScene = DiscoveryScene()
+            newScene.size = self.size
+            self.scene?.view?.presentScene(newScene)
+             default:
+                print("Some other contact occurred")
+             }
+    }
+    
 }

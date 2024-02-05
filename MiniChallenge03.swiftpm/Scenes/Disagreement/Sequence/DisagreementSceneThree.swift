@@ -37,7 +37,9 @@ class DisagreementSceneThree: SKScene{
                 angryReaction()
             }
             else if(countTaps==2){
-                
+                let newScene = DisagreementSceneFour()
+                newScene.size = self.size
+                self.scene?.view?.presentScene(newScene)
             }
         }while(touches.first!.tapCount < 1)
     }

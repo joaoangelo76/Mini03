@@ -7,9 +7,12 @@
 
 import SpriteKit
 
+let bobDiscoveryFinalCategory: UInt32 = 1
+let doorDiscoveryFinalCategory: UInt32 = 2
+
 class DiscoverySceneFinal: SKScene{
     
-    let bob = SKShapeNode(circleOfRadius: 30)
+    let bob = SKSpriteNode(imageNamed: "purpleBob")
     
     let textBoxer = SKLabelNode(text: "Our discovery comes...")
     let textBoxer2 = SKLabelNode(text: "But not without a cost.")
@@ -21,6 +24,8 @@ class DiscoverySceneFinal: SKScene{
     let cam = SKCameraNode()
     
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
         backgroundColor = .black
         
         addBob()
@@ -50,7 +55,12 @@ class DiscoverySceneFinal: SKScene{
     
     func addBob(){
         bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2)
-        bob.fillColor = .purple
+        bob.physicsBody = SKPhysicsBody(circleOfRadius: 30)
+        bob.physicsBody?.affectedByGravity = false
+        bob.physicsBody?.categoryBitMask = bobLoveCategory
+        bob.physicsBody?.collisionBitMask = 0
+        bob.physicsBody?.contactTestBitMask = doorLoveCategory
+        
         addChild(bob)
     }
     
@@ -85,7 +95,33 @@ class DiscoverySceneFinal: SKScene{
         let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
         door.fillColor = .systemPurple
         door.position = CGPoint(x: size.width/2 + 1800, y: size.height/2 + 50)
+        door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
+        door.physicsBody?.affectedByGravity = false
+        door.physicsBody?.categoryBitMask = doorLoveCategory
+        door.physicsBody?.collisionBitMask = 0
+        door.physicsBody?.contactTestBitMask = bobLoveCategory
         
         addChild(door)
     }
+}
+
+extension DiscoverySceneFinal: SKPhysicsContactDelegate{
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+
+        print("didBegin entered for \(String(describing: contact.bodyA.node?.name)) and \(String(describing: contact.bodyB.node?.name))")
+
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+
+        switch contactMask {
+             case doorDiscoveryFinalCategory | bobDiscoveryFinalCategory:
+                print("Bob and door have contacted.")
+            let newScene = DisagreementScene()
+            newScene.size = self.size
+            self.scene?.view?.presentScene(newScene)
+             default:
+                print("Some other contact occurred")
+             }
+    }
+    
 }
