@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 let bobCategory: UInt32 = 1
 let doorCategory: UInt32 = 2
@@ -20,13 +21,14 @@ class BeginningScene: SKScene{
     
     var greyBob = SKSpriteNode(imageNamed: "greyBob")
     
-    let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
+    let door = SKSpriteNode(imageNamed: "doorPurple")
     
     let textBoxer = SKLabelNode(text: "In the beginning...")
     let textBoxer2 = SKLabelNode(text: "We are empty shells.")
     let textBoxer3 = SKLabelNode(text: "Ready to be filled.")
     
     override func didMove(to view: SKView) {
+        
         self.physicsWorld.contactDelegate = self
         
         background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
@@ -54,8 +56,8 @@ class BeginningScene: SKScene{
     override func update(_ currentTime: TimeInterval) {
         if control == true{
             greyBob.position = greyBob.position + CGPoint(x: 3, y: 0)
+            
         }
-        
         cam.position = greyBob.position
     }
     
@@ -77,7 +79,7 @@ class BeginningScene: SKScene{
     private func textBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
         
         addChild(textBoxer)
         
@@ -89,7 +91,7 @@ class BeginningScene: SKScene{
     private func textBox2(){
         textBoxer2.color = .white
         textBoxer2.isPaused = false
-        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 100)
+        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 150)
         textBoxer2.alpha = 0
         
         addChild(textBoxer2)
@@ -104,7 +106,7 @@ class BeginningScene: SKScene{
     private func textBox3(){
         textBoxer3.color = .white
         textBoxer3.isPaused = false
-        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 100)
+        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 150)
         textBoxer3.alpha = 0
         
         addChild(textBoxer3)
@@ -117,7 +119,6 @@ class BeginningScene: SKScene{
     }
     
     private func doorWhatever(){
-        door.fillColor = .systemPurple
         door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
         door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         door.physicsBody?.affectedByGravity = false

@@ -13,15 +13,26 @@ let invisibleCategory: UInt32 = 2
 
 class DiscoveryScene: SKScene{
     
+    var controlContact = false
+    
+    var controlAppear = false
+    
     var background = SKSpriteNode(imageNamed: "starSky")
     
-    let bob = SKShapeNode(circleOfRadius: 30)
+    let bob = SKSpriteNode(imageNamed: "purpleBob")
+    
+    let friendOne = SKShapeNode(circleOfRadius: 30)
+    let friendTwo = SKShapeNode(circleOfRadius: 30)
+    let friendThree = SKShapeNode(circleOfRadius: 30)
+    let friendFour = SKShapeNode(circleOfRadius: 30)
     
     let invisible = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
     
     var control: Bool = false
     
     let HVM = HomeViewModel()
+    
+    var countTaps = 0
     
     let cam = SKCameraNode()
     
@@ -30,6 +41,8 @@ class DiscoveryScene: SKScene{
     let textBoxer3 = SKLabelNode(text: "To go to new places...")
     
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
         background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         addChild(background)
         
@@ -42,15 +55,37 @@ class DiscoveryScene: SKScene{
         textBox3()
         
         invisibleObject()
+        
+        SKAction.fadeAlpha(to: 0, duration: 4)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if controlContact == true{
+            repeat{
+                countTaps+=1
+                if(countTaps==1){
+                    print("first touch")
+                }
+                if(countTaps==2){
+                    print("second touch")
+                    addFourFriends()
+                }
+                if(countTaps==3){
+                    let newScene = DiscoverySceneFinal()
+                    newScene.size = self.size
+                    self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 3))
+                }
+            }while(touches.first!.tapCount < 1)
+        }
         control = true
     }
     
     override func update(_ currentTime: TimeInterval) {
         if control == true{
             bob.position = bob.position + CGPoint(x: 3, y: 0)
+        }
+        if controlContact == true{
+            control = false
         }
         cam.position = bob.position
     }
@@ -60,7 +95,6 @@ class DiscoveryScene: SKScene{
     }
     
     private func addBob(){
-        bob.fillColor = .systemPurple
         bob.position = CGPoint(x: size.width/2, y: size.height/2)
         bob.physicsBody = SKPhysicsBody(circleOfRadius: 30)
         bob.physicsBody?.affectedByGravity = false
@@ -71,10 +105,48 @@ class DiscoveryScene: SKScene{
         addChild(bob)
     }
     
+    private func addFourFriends(){
+        friendOne.fillColor = .systemPurple
+        friendOne.position = CGPoint(x: size.width/2 + 3600, y: size.height/2 + 150)
+        friendOne.isPaused = false
+        friendOne.alpha = 0
+        
+        friendTwo.fillColor = .systemPurple
+        friendTwo.position = CGPoint(x: size.width/2 + 3750, y: size.height/2)
+        friendTwo.isPaused = false
+        friendTwo.alpha = 0
+        
+        friendThree.fillColor = .systemPurple
+        friendThree.position = CGPoint(x: size.width/2 + 3450, y: size.height/2)
+        friendThree.isPaused = false
+        friendThree.alpha = 0
+        
+        friendFour.fillColor = .systemPurple
+        friendFour.position = CGPoint(x: size.width/2 + 3600, y: size.height/2 - 150)
+        friendFour.isPaused = false
+        friendFour.alpha = 0
+        
+        addChild(friendOne)
+        addChild(friendTwo)
+        addChild(friendThree)
+        addChild(friendFour)
+        
+        let appear = SKAction.fadeAlpha(to: 1, duration: 6)
+        
+        friendOne.run(appear)
+        friendTwo.run(appear)
+        friendThree.run(appear)
+        friendFour.run(appear)
+    }
+    
+    private func revelationLight(){
+        
+    }
+    
     private func textBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
         
         addChild(textBoxer)
         
@@ -86,7 +158,7 @@ class DiscoveryScene: SKScene{
     private func textBox2(){
         textBoxer2.color = .white
         textBoxer2.isPaused = false
-        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 100)
+        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 150)
         textBoxer2.alpha = 0
         
         addChild(textBoxer2)
@@ -101,7 +173,7 @@ class DiscoveryScene: SKScene{
     private func textBox3(){
         textBoxer3.color = .white
         textBoxer3.isPaused = false
-        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 100)
+        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 150)
         textBoxer3.alpha = 0
         
         addChild(textBoxer3)
@@ -114,8 +186,8 @@ class DiscoveryScene: SKScene{
     }
     
     private func invisibleObject(){
-        invisible.fillColor = .red
-        invisible.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
+        invisible.isHidden = true
+        invisible.position = CGPoint(x: size.width/2 + 3675, y: size.height/2)
         invisible.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         invisible.physicsBody?.affectedByGravity = false
         invisible.physicsBody?.categoryBitMask = invisibleCategory
@@ -138,9 +210,7 @@ extension DiscoveryScene: SKPhysicsContactDelegate{
         switch contactMask {
              case invisibleCategory | bobDiscoveryCategory:
                 print("Bob and door have contacted.")
-            let newScene = LoveScene()
-            newScene.size = self.size
-            self.scene?.view?.presentScene(newScene)
+            controlContact = true
              default:
                 print("Some other contact occurred")
              }

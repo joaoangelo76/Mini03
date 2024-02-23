@@ -9,12 +9,17 @@ import SpriteKit
 
 class DisagreementSceneTwo: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let dad = SKSpriteNode(imageNamed: "Dad")
     let textBoxer = SKLabelNode(text: "Memories will be awaken.")
     
     var countTaps = 0
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         backgroundColor = .black
         
         addDad()

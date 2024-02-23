@@ -10,15 +10,15 @@ import SpriteKit
 class DisagreementSceneThree: SKScene{
     
     
-    let bob = SKShapeNode(circleOfRadius: 30)
-    let dad = SKShapeNode(circleOfRadius: 100)
-    let mom = SKShapeNode(circleOfRadius: 100)
+    let bob = SKSpriteNode(imageNamed: "Dad")
+    let dad = SKSpriteNode(imageNamed: "Grandpa")
+    let mom = SKSpriteNode(imageNamed: "Grandma")
     
     var countTaps = 0
     
-    let angryReact = SKShapeNode(circleOfRadius: 30)
-    let angryReact2 = SKShapeNode(circleOfRadius: 30)
-    let angryReact3 = SKShapeNode(circleOfRadius: 15)
+    let angryReact = SKSpriteNode(imageNamed: "angryOne")
+    let angryReact2 = SKSpriteNode(imageNamed: "angryOne")
+    let angryReact3 = SKSpriteNode(imageNamed: "angryOne")
     
     override func didMove(to view: SKView) {
         backgroundColor = .black
@@ -46,9 +46,6 @@ class DisagreementSceneThree: SKScene{
     
     func angryReaction(){
         
-        angryReact.fillColor = .green
-        angryReact2.fillColor = .green
-        
         angryReact.position = CGPoint(x: size.width/2 + 210 , y: size.height/2 + 280)
         angryReact2.position = CGPoint(x: size.width/2 + 490 , y: size.height/2 + 280)
         
@@ -64,20 +61,17 @@ class DisagreementSceneThree: SKScene{
     }
     
     func addBob(){
-        bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2)
-        bob.fillColor = .blue
+        bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2 - 100)
         addChild(bob)
     }
     
     func addDad(){
-        dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 200)
-        dad.fillColor = .systemTeal
+        dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 100)
         addChild(dad)
     }
     
     func addMom(){
-        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 200)
-        mom.fillColor = .systemPink
+        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 100)
         addChild(mom)
     }
     

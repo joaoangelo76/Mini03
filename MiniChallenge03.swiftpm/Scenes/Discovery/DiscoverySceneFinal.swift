@@ -12,6 +12,8 @@ let doorDiscoveryFinalCategory: UInt32 = 2
 
 class DiscoverySceneFinal: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let bob = SKSpriteNode(imageNamed: "purpleBob")
     
     let textBoxer = SKLabelNode(text: "Our discovery comes...")
@@ -24,6 +26,9 @@ class DiscoverySceneFinal: SKScene{
     let cam = SKCameraNode()
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         self.physicsWorld.contactDelegate = self
         
         backgroundColor = .black
@@ -67,7 +72,7 @@ class DiscoverySceneFinal: SKScene{
     private func textBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
         
         addChild(textBoxer)
         
@@ -79,7 +84,7 @@ class DiscoverySceneFinal: SKScene{
     private func textBox2(){
         textBoxer2.color = .white
         textBoxer2.isPaused = false
-        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 100)
+        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 150)
         textBoxer2.alpha = 0
         
         addChild(textBoxer2)
@@ -92,8 +97,7 @@ class DiscoverySceneFinal: SKScene{
     }
     
     private func door(){
-        let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
-        door.fillColor = .systemPurple
+        let door = SKSpriteNode(imageNamed: "doorRed")
         door.position = CGPoint(x: size.width/2 + 1800, y: size.height/2 + 50)
         door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         door.physicsBody?.affectedByGravity = false

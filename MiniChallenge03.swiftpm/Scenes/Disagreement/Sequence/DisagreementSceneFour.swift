@@ -9,7 +9,7 @@ import SpriteKit
 
 class DisagreementSceneFour: SKScene{
     
-    let dad = SKShapeNode(circleOfRadius: 100)
+    let dad = SKSpriteNode(imageNamed: "Dad")
     let textBoxer = SKLabelNode(text: "Regret")
     
     var countTaps = 0
@@ -38,7 +38,6 @@ class DisagreementSceneFour: SKScene{
     
     func addDad(){
         dad.position = CGPoint(x: size.width/2, y: size.height/2)
-        dad.fillColor = .blue
         addChild(dad)
     }
     

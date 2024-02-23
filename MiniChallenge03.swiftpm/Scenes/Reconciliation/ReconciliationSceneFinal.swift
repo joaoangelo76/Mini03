@@ -7,11 +7,11 @@
 
 import SpriteKit
 
-class DisagreementSceneFinal: SKScene{
+class ReconciliationSceneFinal: SKScene{
     
-    let bob = SKShapeNode(circleOfRadius: 30)
-    let dad = SKShapeNode(circleOfRadius: 100)
-    let mom = SKShapeNode(circleOfRadius: 100)
+    let bob = SKSpriteNode(imageNamed: "purpleBob")
+    let dad = SKSpriteNode(imageNamed: "Dad")
+    let mom = SKSpriteNode(imageNamed: "MomLeft")
     
     var countTaps = 0
     
@@ -41,27 +41,24 @@ class DisagreementSceneFinal: SKScene{
     }
     
     func addBob(){
-        bob.position = CGPoint(x: size.width/2 + 300, y: size.height/2)
-        bob.fillColor = .purple
+        bob.position = CGPoint(x: size.width/2 + 300, y: size.height/2 - 50)
         addChild(bob)
     }
     
     func addDad(){
-        dad.position = CGPoint(x: size.width/2 - 400, y: size.height/2 + 200)
-        dad.fillColor = .blue
+        dad.position = CGPoint(x: size.width/2 - 400, y: size.height/2 + 100)
         addChild(dad)
     }
     
     func addMom(){
-        mom.position = CGPoint(x: size.width/2 - 120, y: size.height/2 + 200)
-        mom.fillColor = .red
+        mom.position = CGPoint(x: size.width/2 - 120, y: size.height/2 + 85)
         addChild(mom)
     }
     
     func addTextBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 60)
+        textBoxer.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 100)
         
         addChild(textBoxer)
         
@@ -73,7 +70,7 @@ class DisagreementSceneFinal: SKScene{
     private func addTextBox2(){
         textBoxer2.color = .white
         textBoxer2.isPaused = false
-        textBoxer2.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 60)
+        textBoxer2.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 100)
         textBoxer2.alpha = 0
         
         addChild(textBoxer2)

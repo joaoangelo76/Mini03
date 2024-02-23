@@ -12,6 +12,8 @@ let doorLoveCategory: UInt32 = 2
 
 class LoveScene: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let bob = SKSpriteNode(imageNamed: "greyBob")
     let dad = SKSpriteNode(imageNamed: "Dad")
     let mom = SKSpriteNode(imageNamed: "Mom")
@@ -23,6 +25,9 @@ class LoveScene: SKScene{
     var countTaps = 0
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         self.physicsWorld.contactDelegate = self
         
         backgroundColor = .black
@@ -84,12 +89,12 @@ class LoveScene: SKScene{
     }
     
     func addDad(){
-        dad.position = CGPoint(x: size.width/2 + 200, y: size.height/2 + 200)
+        dad.position = CGPoint(x: size.width/2 - 320, y: size.height/2 + 100)
         addChild(dad)
     }
     
     func addMom(){
-        mom.position = CGPoint(x: size.width/2 - 170, y: size.height/2 + 200)
+        mom.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 90)
         addChild(mom)
     }
     
@@ -111,7 +116,7 @@ class LoveScene: SKScene{
     func addTextBox(){
         let textBoxer = SKLabelNode(text: "We are loved.")
         textBoxer.fontColor = .white
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
     
         let appear = SKAction.fadeAlpha(to: 1, duration: 6)
         let disappear = SKAction.fadeAlpha(to: 0, duration: 6)
@@ -125,7 +130,7 @@ class LoveScene: SKScene{
     func addTextBox2(){
         let textBoxer2 = SKLabelNode(text: "But the time comes.")
         textBoxer2.fontColor = .white
-        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 100)
+        textBoxer2.position = CGPoint(x: size.width/2 + 1200, y: size.height/2 + 150)
     
         let appear = SKAction.fadeAlpha(to: 1, duration: 12)
         let disappear = SKAction.fadeAlpha(to: 0, duration: 6)
@@ -139,7 +144,7 @@ class LoveScene: SKScene{
     func addTextBox3(){
         let textBoxer3 = SKLabelNode(text: "For us to discover ourselves.")
         textBoxer3.fontColor = .white
-        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 100)
+        textBoxer3.position = CGPoint(x: size.width/2 + 2400, y: size.height/2 + 150)
     
         let appear = SKAction.fadeAlpha(to: 1, duration: 12)
         let disappear = SKAction.fadeAlpha(to: 0, duration: 6)
@@ -151,8 +156,7 @@ class LoveScene: SKScene{
     }
     
     private func door(){
-        let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
-        door.fillColor = .systemPurple
+        let door = SKSpriteNode(imageNamed: "doorBlue")
         door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
         door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         door.physicsBody?.affectedByGravity = false

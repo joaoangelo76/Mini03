@@ -9,8 +9,10 @@ import SpriteKit
 
 class DisagreementScene: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let bob = SKSpriteNode(imageNamed: "purpleBob")
-    let dad = SKSpriteNode(imageNamed: "Dad")
+    let dad = SKSpriteNode(imageNamed: "DadLeft")
     let mom = SKSpriteNode(imageNamed: "Mom")
     
     var countTaps = 0
@@ -20,6 +22,9 @@ class DisagreementScene: SKScene{
     let angryReact3 = SKSpriteNode(imageNamed: "angryOne")
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         backgroundColor = .black
         
         addBob()
@@ -43,9 +48,9 @@ class DisagreementScene: SKScene{
     
     func angryReaction(){
         
-        angryReact.position = CGPoint(x: size.width/2 + 180 , y: size.height/2 + 320)
-        angryReact2.position = CGPoint(x: size.width/2 + 340 , y: size.height/2 + 320)
-        angryReact3.position = CGPoint(x: size.width/2 - 160, y: size.height/2 + 60)
+        angryReact.position = CGPoint(x: size.width/2 + 180 , y: size.height/2 + 350)
+        angryReact2.position = CGPoint(x: size.width/2 + 460 , y: size.height/2 + 350)
+        angryReact3.position = CGPoint(x: size.width/2 - 240, y: size.height/2 + 110)
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 10)
@@ -61,17 +66,17 @@ class DisagreementScene: SKScene{
     }
     
     func addBob(){
-        bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2)
+        bob.position = CGPoint(x: size.width/2 - 300, y: size.height/2)
         addChild(bob)
     }
     
     func addDad(){
-        dad.position = CGPoint(x: size.width/2 + 300, y: size.height/2 + 200)
+        dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 120)
         addChild(dad)
     }
     
     func addMom(){
-        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 200)
+        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 100)
         addChild(mom)
     }
     
