@@ -9,9 +9,11 @@ import SpriteKit
 
 class ReconciliationSceneFinal: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let bob = SKSpriteNode(imageNamed: "purpleBob")
-    let dad = SKSpriteNode(imageNamed: "Dad")
-    let mom = SKSpriteNode(imageNamed: "MomLeft")
+    let dad = SKSpriteNode(imageNamed: "DadOneLastTime")
+    let mom = SKSpriteNode(imageNamed: "MomOneLastTime")
     
     var countTaps = 0
     
@@ -19,6 +21,8 @@ class ReconciliationSceneFinal: SKScene{
     let textBoxer2 = SKLabelNode(text: "Will always prevail.")
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
         backgroundColor = .black
         
         addBob()
@@ -35,7 +39,6 @@ class ReconciliationSceneFinal: SKScene{
             }
             if(countTaps==2){
                 addTextBox2()
-                loveBalloon()
             }
         }while(touches.first!.tapCount < 1)
     }
@@ -83,26 +86,9 @@ class ReconciliationSceneFinal: SKScene{
     }
     
     private func door(){
-        let door = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
-        door.fillColor = .systemPurple
+        let door = SKSpriteNode(imageNamed: "LastDoor")
         door.position = CGPoint(x: size.width/2 + 500, y: size.height/2 + 50)
         
         addChild(door)
-    }
-    
-    func loveBalloon(){
-        let loveBalloon = SKShapeNode(circleOfRadius: 50)
-        loveBalloon.position = CGPoint(x: size.width/2 - 260, y: size.height/2 + 330)
-        loveBalloon.fillColor = .white
-        
-        let appear = SKAction.fadeIn(withDuration: 2)
-        let disappear = SKAction.fadeOut(withDuration: 2)
-        let sequence = SKAction.sequence([appear, disappear])
-        
-        
-        
-        addChild(loveBalloon)
-        
-        loveBalloon.run(sequence)
     }
 }

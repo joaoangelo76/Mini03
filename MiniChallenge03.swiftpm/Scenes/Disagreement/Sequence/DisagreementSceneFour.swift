@@ -12,7 +12,6 @@ class DisagreementSceneFour: SKScene{
     var background = SKSpriteNode(imageNamed: "Theater")
     
     let dad = SKSpriteNode(imageNamed: "Dad")
-    let textBoxer = SKLabelNode(text: "Regret")
     
     var countTaps = 0
     
@@ -47,15 +46,17 @@ class DisagreementSceneFour: SKScene{
     }
     
     func addTextBox(){
-        textBoxer.color = .white
-        textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 130)
+        let textBoxer = SKLabelNode(text: "Regret.")
+        textBoxer.fontColor = .white
+        textBoxer.position = CGPoint(x: size.width/2 - 300, y: size.height/2 + 50)
+    
+        let appear = SKAction.fadeAlpha(to: 1, duration: 6)
+        let disappear = SKAction.fadeAlpha(to: 0, duration: 6)
+        let sequence = SKAction.sequence([appear, disappear])
         
         addChild(textBoxer)
         
-        let disappear = SKAction.fadeOut(withDuration: 6)
-        
-        textBoxer.run(disappear)
+        textBoxer.run(sequence)
     }
     
     func loveBalloon(){
