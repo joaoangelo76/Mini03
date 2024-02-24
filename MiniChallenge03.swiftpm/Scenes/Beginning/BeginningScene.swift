@@ -119,7 +119,7 @@ class BeginningScene: SKScene{
     }
     
     private func doorWhatever(){
-        door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
+        door.position = CGPoint(x: size.width/2 + 3000, y: size.height/2)
         door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         door.physicsBody?.affectedByGravity = false
         door.physicsBody?.categoryBitMask = doorCategory

@@ -9,12 +9,17 @@ import SpriteKit
 
 class DisagreementSceneFour: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
+    
     let dad = SKSpriteNode(imageNamed: "Dad")
     let textBoxer = SKLabelNode(text: "Regret")
     
     var countTaps = 0
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         backgroundColor = .black
         
         addDad()
@@ -54,9 +59,8 @@ class DisagreementSceneFour: SKScene{
     }
     
     func loveBalloon(){
-        let loveBalloon = SKShapeNode(circleOfRadius: 50)
+        let loveBalloon = SKSpriteNode(imageNamed: "Heartbroken")
         loveBalloon.position = CGPoint(x: size.width/2 + 200, y: size.height/2 + 50)
-        loveBalloon.fillColor = .white
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 2)

@@ -14,9 +14,9 @@ class LoveScene: SKScene{
     
     var background = SKSpriteNode(imageNamed: "Theater")
     
-    let bob = SKSpriteNode(imageNamed: "greyBob")
-    let dad = SKSpriteNode(imageNamed: "Dad")
-    let mom = SKSpriteNode(imageNamed: "Mom")
+    let bob = SKSpriteNode(imageNamed: "purpleBobHappy")
+    let dad = SKSpriteNode(imageNamed: "DadHappyRight")
+    let mom = SKSpriteNode(imageNamed: "MomHappyLeft")
     
     let cam = SKCameraNode()
     
@@ -100,7 +100,7 @@ class LoveScene: SKScene{
     
     func loveBalloon(){
         let loveBalloon = SKSpriteNode(imageNamed: "loveBalloon")
-        loveBalloon.position = CGPoint(x: size.width/2 + 25, y: size.height/2 + 300)
+        loveBalloon.position = CGPoint(x: size.width/2, y: size.height/2 + 260)
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 2)
@@ -157,7 +157,7 @@ class LoveScene: SKScene{
     
     private func door(){
         let door = SKSpriteNode(imageNamed: "doorBlue")
-        door.position = CGPoint(x: size.width/2 + 3600, y: size.height/2)
+        door.position = CGPoint(x: size.width/2 + 3000, y: size.height/2)
         door.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         door.physicsBody?.affectedByGravity = false
         door.physicsBody?.categoryBitMask = doorLoveCategory

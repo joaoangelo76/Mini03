@@ -13,11 +13,13 @@ let invisibleFlyingCategory: UInt32 = 2
 
 class FlyingSequence: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "starSky")
+    
     var controlContact = false
     
     let dad = SKSpriteNode(imageNamed: "Dad")
     
-    let bob = SKSpriteNode(imageNamed: "purpleBob")
+    let bob = SKSpriteNode(imageNamed: "purpleBobLeft")
     
     var countTaps = 0
     
@@ -33,6 +35,9 @@ class FlyingSequence: SKScene{
     
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
+        
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
         
         backgroundColor = .black
         
@@ -106,7 +111,7 @@ class FlyingSequence: SKScene{
     private func textBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 300)
         
         addChild(textBoxer)
         

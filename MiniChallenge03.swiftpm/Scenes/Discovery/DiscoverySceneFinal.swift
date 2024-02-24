@@ -72,7 +72,7 @@ class DiscoverySceneFinal: SKScene{
     private func textBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 150)
+        textBoxer.position = CGPoint(x: size.width/2 - 190, y: size.height/2 + 150)
         
         addChild(textBoxer)
         

@@ -49,7 +49,7 @@ class DisagreementSceneTwo: SKScene{
     func addTextBox(){
         textBoxer.color = .white
         textBoxer.isPaused = false
-        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 130)
+        textBoxer.position = CGPoint(x: size.width/2, y: size.height/2 + 300)
         
         addChild(textBoxer)
         
@@ -59,9 +59,8 @@ class DisagreementSceneTwo: SKScene{
     }
     
     func loveBalloon(){
-        let loveBalloon = SKShapeNode(circleOfRadius: 50)
-        loveBalloon.position = CGPoint(x: size.width/2 + 200, y: size.height/2 + 50)
-        loveBalloon.fillColor = .white
+        let loveBalloon = SKSpriteNode(imageNamed: "Image")
+        loveBalloon.position = CGPoint(x: size.width/2 + 200, y: size.height/2 + 150)
         
         let appear = SKAction.fadeIn(withDuration: 2)
         let disappear = SKAction.fadeOut(withDuration: 2)

@@ -9,8 +9,9 @@ import SpriteKit
 
 class DisagreementSceneThree: SKScene{
     
+    var background = SKSpriteNode(imageNamed: "Theater")
     
-    let bob = SKSpriteNode(imageNamed: "Dad")
+    let bob = SKSpriteNode(imageNamed: "youngDad")
     let dad = SKSpriteNode(imageNamed: "Grandpa")
     let mom = SKSpriteNode(imageNamed: "Grandma")
     
@@ -21,6 +22,9 @@ class DisagreementSceneThree: SKScene{
     let angryReact3 = SKSpriteNode(imageNamed: "angryOne")
     
     override func didMove(to view: SKView) {
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         backgroundColor = .black
         
         addBob()
@@ -61,24 +65,24 @@ class DisagreementSceneThree: SKScene{
     }
     
     func addBob(){
-        bob.position = CGPoint(x: size.width/2 - 200, y: size.height/2 - 100)
+        bob.position = CGPoint(x: size.width/2 - 300, y: size.height/2 - 100)
         addChild(bob)
     }
     
     func addDad(){
-        dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 100)
+        dad.position = CGPoint(x: size.width/2 + 400, y: size.height/2 + 90)
         addChild(dad)
     }
     
     func addMom(){
-        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 100)
+        mom.position = CGPoint(x: size.width/2 + 120, y: size.height/2 + 70)
         addChild(mom)
     }
     
     func addTextBox(){
         let textBoxer = SKLabelNode(text: "And with that...")
         textBoxer.fontColor = .white
-        textBoxer.position = CGPoint(x: size.width/2 - 200, y: size.height/2 + 50)
+        textBoxer.position = CGPoint(x: size.width/2 - 300, y: size.height/2 + 50)
     
         let appear = SKAction.fadeAlpha(to: 1, duration: 6)
         let disappear = SKAction.fadeAlpha(to: 0, duration: 6)

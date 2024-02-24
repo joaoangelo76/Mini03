@@ -19,12 +19,14 @@ class DiscoveryScene: SKScene{
     
     var background = SKSpriteNode(imageNamed: "starSky")
     
+    let magicHat = SKSpriteNode(imageNamed: "magicHat")
+    
     let bob = SKSpriteNode(imageNamed: "purpleBob")
     
-    let friendOne = SKShapeNode(circleOfRadius: 30)
-    let friendTwo = SKShapeNode(circleOfRadius: 30)
-    let friendThree = SKShapeNode(circleOfRadius: 30)
-    let friendFour = SKShapeNode(circleOfRadius: 30)
+    let friendOne = SKSpriteNode(imageNamed: "Star")
+    let friendTwo = SKSpriteNode(imageNamed: "Star")
+    let friendThree = SKSpriteNode(imageNamed: "Star")
+    let friendFour = SKSpriteNode(imageNamed: "Star")
     
     let invisible = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
     
@@ -69,6 +71,7 @@ class DiscoveryScene: SKScene{
                 if(countTaps==2){
                     print("second touch")
                     addFourFriends()
+                    addMagicHat()
                 }
                 if(countTaps==3){
                     let newScene = DiscoverySceneFinal()
@@ -94,6 +97,17 @@ class DiscoveryScene: SKScene{
         control = false
     }
     
+    private func addMagicHat(){
+        magicHat.position = CGPoint(x: size.width/2 + 3430, y: size.height/2 - 30)
+        magicHat.alpha = 0
+        
+        addChild(magicHat)
+        
+        let appear = SKAction.fadeAlpha(to: 1, duration: 6)
+        
+         magicHat.run(appear)
+    }
+    
     private func addBob(){
         bob.position = CGPoint(x: size.width/2, y: size.height/2)
         bob.physicsBody = SKPhysicsBody(circleOfRadius: 30)
@@ -106,23 +120,19 @@ class DiscoveryScene: SKScene{
     }
     
     private func addFourFriends(){
-        friendOne.fillColor = .systemPurple
-        friendOne.position = CGPoint(x: size.width/2 + 3600, y: size.height/2 + 150)
+        friendOne.position = CGPoint(x: size.width/2 + 3450, y: size.height/2 + 200)
         friendOne.isPaused = false
         friendOne.alpha = 0
         
-        friendTwo.fillColor = .systemPurple
-        friendTwo.position = CGPoint(x: size.width/2 + 3750, y: size.height/2)
+        friendTwo.position = CGPoint(x: size.width/2 + 3700, y: size.height/2)
         friendTwo.isPaused = false
         friendTwo.alpha = 0
         
-        friendThree.fillColor = .systemPurple
-        friendThree.position = CGPoint(x: size.width/2 + 3450, y: size.height/2)
+        friendThree.position = CGPoint(x: size.width/2 + 3200, y: size.height/2)
         friendThree.isPaused = false
         friendThree.alpha = 0
         
-        friendFour.fillColor = .systemPurple
-        friendFour.position = CGPoint(x: size.width/2 + 3600, y: size.height/2 - 150)
+        friendFour.position = CGPoint(x: size.width/2 + 3450, y: size.height/2 - 200)
         friendFour.isPaused = false
         friendFour.alpha = 0
         
@@ -187,7 +197,7 @@ class DiscoveryScene: SKScene{
     
     private func invisibleObject(){
         invisible.isHidden = true
-        invisible.position = CGPoint(x: size.width/2 + 3675, y: size.height/2)
+        invisible.position = CGPoint(x: size.width/2 + 3500, y: size.height/2)
         invisible.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 200))
         invisible.physicsBody?.affectedByGravity = false
         invisible.physicsBody?.categoryBitMask = invisibleCategory
